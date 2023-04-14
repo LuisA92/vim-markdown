@@ -832,6 +832,20 @@ function! s:MarkdownHighlightSources(force)
     endfor
 endfunction
 
+function! s:MarkdownHighlightMyst()
+    " MyST roles
+    syntax match mkdMystRole "\v\@<!:\w+`[^`]+`"
+    highlight default link mkdMystRole mkdInlineCode
+
+    " MyST directives
+    syntax match mkdMystDirective "^\s*```\{3}\s*{[^}]*}"
+    highlight default link mkdMystDirective mkdDelimiter
+
+    " MyST admonitions
+    syntax region mkdMystAdmonition start="^\s*```{admonition}" end="^\s*```\{3}" contains=@mkdTop
+    highlight default link mkdMystAdmonition mkdDelimiter
+endfunction
+
 function! s:SyntaxInclude(filetype)
     " Include the syntax highlighting of another {filetype}.
     let grouplistname = '@' . toupper(a:filetype)
@@ -867,6 +881,7 @@ function! s:MarkdownRefreshSyntax(force)
     "
     " vint: next-line -ProhibitEqualTildeOperator
     if s:IsHighlightSourcesEnabledForBuffer() && line('$') > 1 && &syntax != 'OFF'
+				call s:MarkdownHighlightMyst()
         call s:MarkdownHighlightSources(a:force)
     endif
 endfunction

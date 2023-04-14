@@ -790,10 +790,11 @@ function! s:MarkdownHighlightSources(force)
     " Look for code blocks in the current file
     let filetypes = {}
     for line in getline(1, '$')
-				let ft = matchstr(line, '\(`\{3,}\|\~\{3,}\)\(\s*{code-cell}\s*\)\?\s*\zs[0-9A-Za-z_+-]*\ze.*')
+				let ft = matchstr(line, '^\s*(`\{3,}\|~\{3,}\|:::\s*{code-cell}\)\s*\(\w\+\)\?[^`]*\zs[0-9A-Za-z_+-]*\ze.*')
         if !empty(ft) && ft !~# '^\d*$' | let filetypes[ft] = 1 | endif
-				let ft_colon = matchstr(line, '^\s*:::\s*{code-cell}\s*\zs[0-9A-Za-z_+-]*\ze.*')
-				if !empty(ft_colon) && ft_colon !~# '^\d*$' | let filetypes[ft_colon] = 1 | endif
+				let ft_colon_no_code_cell = matchstr(line, '^\s*:::\s*\zs[0-9A-Za-z_+-]*\ze.*')
+				if !empty(ft_colon_no_code_cell) && ft_colon_no_code_cell !~# '^\d*$' | let filetypes[ft_colon_no_code_cell] = 1 | endif
+
 
     endfor
     if !exists('b:mkd_known_filetypes')
@@ -826,7 +827,7 @@ function! s:MarkdownHighlightSources(force)
             endif
             let command_backtick = 'syntax region %s matchgroup=%s start="^\s*`\{3,}\s*%s.*$" matchgroup=%s end="\s*`\{3,}$" keepend contains=%s%s'
             let command_tilde    = 'syntax region %s matchgroup=%s start="^\s*\~\{3,}\s*%s.*$" matchgroup=%s end="\s*\~\{3,}$" keepend contains=%s%s'
-						let command_colon = 'syntax region %s matchgroup=%s start="^\s*:::\s*%s.*$" matchgroup=%s end="\s*:::$" keepend contains=%s%s'
+						let command_colon = 'syntax region %s matchgroup=%s start="^\s*:::\s*\(%s\)\?{code-cell}\s*.*$" matchgroup=%s end="\s*:::$" keepend contains=%s%s'
 						execute printf(command_colon, group, startgroup, ft, endgroup, include, has('conceal') && get(g:, 'vim_markdown_conceal', 1) && get(g:, 'vim_markdown_conceal_code_blocks', 1) ? ' concealends' : '')
             execute printf(command_backtick, group, startgroup, ft, endgroup, include, has('conceal') && get(g:, 'vim_markdown_conceal', 1) && get(g:, 'vim_markdown_conceal_code_blocks', 1) ? ' concealends' : '')
             execute printf(command_tilde,    group, startgroup, ft, endgroup, include, has('conceal') && get(g:, 'vim_markdown_conceal', 1) && get(g:, 'vim_markdown_conceal_code_blocks', 1) ? ' concealends' : '')

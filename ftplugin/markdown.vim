@@ -785,17 +785,26 @@ else
     \ }
 endif
 
+function! s:ExtractFencedLanguage(line)
+  if a:line =~# '^\s*```\{1,}\s*\w\+\s*$'
+    return matchstr(a:line, '^\s*```\{1,}\s*\zs\w\+\ze\s*$')
+  elseif a:line =~# '^\s*~~~\{1,}\s*\w\+\s*$'
+    return matchstr(a:line, '^\s*~~~\{1,}\s*\zs\w\+\ze\s*$')
+  elseif a:line =~# '^\s*:::\s*{code-cell}\s*\w\+\s*$'
+    return matchstr(a:line, '^\s*:::\s*{code-cell}\s*\zs\w\+\ze\s*$')
+  else
+    return ''
+  endif
+endfunction
+
+
 function! s:MarkdownHighlightSources(force)
     " Syntax highlight source code embedded in notes.
     " Look for code blocks in the current file
     let filetypes = {}
     for line in getline(1, '$')
-			let ft = matchstr(line, '^\s*(`\{3,}\|~\{3,}\|:::\s*{code-cell}\)\s*\(\w\+\)\?\zs[0-9A-Za-z_+-]*\ze[^`]*$')
+				let ft = s:ExtractFencedLanguage(line)
         if !empty(ft) && ft !~# '^\d*$' | let filetypes[ft] = 1 | endif
-				let ft = matchstr(line, '\(`\{3,}\|\~\{3,}\)\(\s*{code-cell}\s*\)\?\s*\zs[0-9A-Za-z_+-]*\ze.*')
-        if !empty(ft) && ft !~# '^\d*$' | let filetypes[ft] = 1 | endif
-				let ft_colon = matchstr(line, '^\s*:::\s*{code-cell}\s*\zs[0-9A-Za-z_+-]*\ze.*')
-				if !empty(ft_colon) && ft_colon !~# '^\d*$' | let filetypes[ft_colon] = 1 | endif
 
     endfor
     if !exists('b:mkd_known_filetypes')

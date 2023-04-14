@@ -101,7 +101,6 @@ syn region htmlH6       matchgroup=mkdHeading     start="^\s*######"            
 syn match  htmlH1       /^.\+\n=\+$/ contains=mkdLink,mkdInlineURL,@Spell
 syn match  htmlH2       /^.\+\n-\+$/ contains=mkdLink,mkdInlineURL,@Spell
 
-"defin MyST markdown syntax
 
 
 "define Markdown groups

@@ -18,8 +18,7 @@ else
 endif
 
 if v:version < 600
-  syntax clear
-elseif exists('b:current_syntax')
+  syntax clear elseif exists('b:current_syntax')
   finish
 endif
 
@@ -70,6 +69,13 @@ execute 'syn region mkdLink matchgroup=mkdDelimiter  start="\\\@<!!\?\[\ze[^]\n]
 " Autolink without angle brackets.
 " mkd  inline links:      protocol     optional  user:pass@  sub/domain                    .com, .co.uk, etc         optional port   path/querystring/hash fragment
 "                         ------------ _____________________ ----------------------------- _________________________ ----------------- __
+"
+"MystMarkdown syntax
+syn match mystDirective "\v^\.\.\s*code-cell(>|::|$)"
+
+"
+"
+"
 syn match   mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z0-9][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?[^] \t]*/
 
 " Autolink with parenthesis.
@@ -94,6 +100,9 @@ syn region htmlH5       matchgroup=mkdHeading     start="^\s*#####"             
 syn region htmlH6       matchgroup=mkdHeading     start="^\s*######"              end="$" contains=mkdLink,mkdInlineURL,@Spell
 syn match  htmlH1       /^.\+\n=\+$/ contains=mkdLink,mkdInlineURL,@Spell
 syn match  htmlH2       /^.\+\n-\+$/ contains=mkdLink,mkdInlineURL,@Spell
+
+"defin MyST markdown syntax
+
 
 "define Markdown groups
 syn match  mkdLineBreak    /  \+$/
@@ -179,6 +188,7 @@ HtmlHiLink mkdLinkDef          mkdID
 HtmlHiLink mkdLinkDefTarget    mkdURL
 HtmlHiLink mkdLinkTitle        htmlString
 HtmlHiLink mkdDelimiter        Delimiter
+HtmlHiLink mystDirective       Comment
 
 let b:current_syntax = 'mkd'
 

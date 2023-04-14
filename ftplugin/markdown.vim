@@ -790,7 +790,7 @@ function! s:MarkdownHighlightSources(force)
     " Look for code blocks in the current file
     let filetypes = {}
     for line in getline(1, '$')
-				let ft = matchstr(line, '^\s*(`\{3,}\|~\{3,}\|:::\s*{code-cell}\)\s*\(\w\+\)\?\zs[0-9A-Za-z_+-]*\ze[^`]*$')
+				let ft = matchstr(line, '^\s*\(`\{3,}\|~\{3,}\|:::\s*{code-cell}\)\s*\(\w\+\)\?\zs[0-9A-Za-z_+-]*\ze[^`]*$')
         if !empty(ft) && ft !~# '^\d*$' | let filetypes[ft] = 1 | endif
 
     endfor

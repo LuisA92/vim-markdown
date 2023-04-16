@@ -180,7 +180,7 @@ endif
 
 syn match mkdCustomLabel /^\s*(\([[:alnum:][:punct:]_-]*\))=\s*$/
 
-syn cluster mkdNonListItem contains=@htmlTop,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
+syn cluster mkdNonListItem contains=@htmlTop,mkdSubscriptContent,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
 
 
 

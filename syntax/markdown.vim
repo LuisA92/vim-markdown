@@ -208,8 +208,8 @@ HtmlHiLink mkdDelimiter        Delimiter
 HtmlHiLink mystDirective       Comment
 HtmlHiLink mkdCustomLabel      String
 
-HtmlHiLink mkdSubscript Subscript
-HtmlHiLink mkdSuperscript Superscript
+HtmlHiLink mkdSubscriptContent Subscript
+HtmlHiLink mkdSuperscriptContent Superscript
 HtmlHiLink mkdSubscriptDelimiter Conceal
 HtmlHiLink mkdSuperscriptDelimiter Conceal
 

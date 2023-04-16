@@ -67,8 +67,14 @@ execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs
 
 execute 'syn region mkdSubscript start="{sub}`" end="`" contains=mkdSubscriptDelimiter' . s:conceal
 execute 'syn region mkdSuperscript start="{sup}`" end="`" contains=mkdSuperscriptDelimiter' . s:conceal
-syn match mkdSubscriptDelimiter "{sub}`\|`" contained conceal
-syn match mkdSuperscriptDelimiter "{sup}`\|`" contained conceal
+syn match mkdSubscriptDelimiter "{sub}`" contained conceal
+syn match mkdSuperscriptDelimiter "{sup}`" contained conceal
+syn match mkdSubscriptDelimiter "`" contained conceal nextgroup=mkdSubscriptContent
+syn match mkdSuperscriptDelimiter "`" contained conceal nextgroup=mkdSuperscriptContent
+syn match mkdSubscriptContent contained "\<alnum\>\+\(\s\<alnum\>\+\)*"
+syn match mkdSuperscriptContent contained "\<alnum\>\+\(\s\<alnum\>\+\)*"
+
+
 
 " [link](URL) | [link][id] | [link][] | ![image](URL)
 syn region mkdFootnotes matchgroup=mkdDelimiter start="\[^"    end="\]"
@@ -177,7 +183,7 @@ endif
 
 syn match mkdCustomLabel /^\s*(\([[:alnum:][:punct:]_-]*\))=\s*$/
 
-syn cluster mkdNonListItem contains=@htmlTop,mkdSubscriptContent,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
+syn cluster mkdNonListItem contains=@htmlTop,mkdSubscriptContent,mkdSuperscriptContent,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
 
 
 

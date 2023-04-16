@@ -64,6 +64,10 @@ execute 'syn region htmlBold matchgroup=mkdBold start="\%(^\|\s\)\zs__\ze\S" end
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs\*\*\*\ze\S" end="\S\zs\*\*\*" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend contains=@Spell' . s:oneline . s:concealends
 
+execute 'syn region mkdSubscript matchgroup=mkdSubscriptDelimiter start="{sub}`" end="`" contains=@Spell' . s:conceal . s:concealends
+execute 'syn region mkdSuperscript matchgroup=mkdSuperscriptDelimiter start="{sup}`" end="`" contains=@Spell' . s:conceal . s:concealends
+
+
 " [link](URL) | [link][id] | [link][] | ![image](URL)
 syn region mkdFootnotes matchgroup=mkdDelimiter start="\[^"    end="\]"
 execute 'syn region mkdID matchgroup=mkdDelimiter    start="\["    end="\]" contained oneline' . s:conceal

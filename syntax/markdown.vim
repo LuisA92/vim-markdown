@@ -189,7 +189,20 @@ HtmlHiLink mkdLinkTitle        htmlString
 HtmlHiLink mkdDelimiter        Delimiter
 HtmlHiLink mystDirective       Comment
 
+
+
+" Define the pattern to match (my label)=
+syn match myLabel /\v\([[:alnum:] _-]+\)=/
+
+" Define the highlighting style for the matched pattern
+hi def link myLabelItalicize Comment
+hi myLabelItalicize gui=italic
+
+
+
 let b:current_syntax = 'mkd'
 
 delcommand HtmlHiLink
 " vim: ts=8
+"
+"

@@ -64,8 +64,13 @@ execute 'syn region htmlBold matchgroup=mkdBold start="\%(^\|\s\)\zs__\ze\S" end
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs\*\*\*\ze\S" end="\S\zs\*\*\*" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend contains=@Spell' . s:oneline . s:concealends
 
-execute 'syn region mkdSubscript matchgroup=mkdSubscriptDelimiter start="{sub}`" end="`" contains=@Spell' . s:conceal . s:concealends
-execute 'syn region mkdSuperscript matchgroup=mkdSuperscriptDelimiter start="{sup}`" end="`" contains=@Spell' . s:conceal . s:concealends
+
+execute 'syn region mkdSubscriptContent start="{sub}`\zs" end="\ze`" contains=@Spell' . s:conceal
+execute 'syn region mkdSuperscriptContent start="{sup}`\zs" end="\ze`" contains=@Spell' . s:conceal
+syn match mkdSubscriptDelimiter "{sub}`\|`" contained
+syn match mkdSuperscriptDelimiter "{sup}`\|`" contained
+syn region mkdSubscript start="{sub}`" end="`" contains=mkdSubscriptContent,mkdSubscriptDelimiter
+syn region mkdSuperscript start="{sup}`" end="`" contains=mkdSuperscriptContent,mkdSuperscriptDelimiter
 
 
 " [link](URL) | [link][id] | [link][] | ![image](URL)

@@ -50,6 +50,10 @@ if get(g:, 'vim_markdown_emphasis_multiline', 1)
 else
     let s:oneline = ' oneline'
 endif
+
+syn region mkdSubscript matchgroup=mkdSubscriptDelimiter start="{sub}`" end="`" contains=@Spell
+syn region mkdSuperscript matchgroup=mkdSuperscriptDelimiter start="{sup}`" end="`" contains=@Spell
+
 syn region mkdItalic matchgroup=mkdItalic start="\%(\*\|_\)"    end="\%(\*\|_\)"
 syn region mkdBold matchgroup=mkdBold start="\%(\*\*\|__\)"    end="\%(\*\*\|__\)"
 syn region mkdBoldItalic matchgroup=mkdBoldItalic start="\%(\*\*\*\|___\)"    end="\%(\*\*\*\|___\)"
@@ -167,7 +171,7 @@ endif
 
 syn match mkdCustomLabel /^\s*(\([[:alnum:][:punct:]_-]*\))=\s*$/
 
-syn cluster mkdNonListItem contains=@htmlTop,mkdCustomLabel,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
+syn cluster mkdNonListItem contains=@htmlTop,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
 
 
 
@@ -194,6 +198,11 @@ HtmlHiLink mkdLinkTitle        htmlString
 HtmlHiLink mkdDelimiter        Delimiter
 HtmlHiLink mystDirective       Comment
 HtmlHiLink mkdCustomLabel      String
+
+HtmlHiLink mkdSubscript Subscript
+HtmlHiLink mkdSuperscript Superscript
+HtmlHiLink mkdSubscriptDelimiter Conceal
+HtmlHiLink mkdSuperscriptDelimiter Conceal
 
 
 

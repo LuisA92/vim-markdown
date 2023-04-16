@@ -65,12 +65,12 @@ execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend contains=@Spell' . s:oneline . s:concealends
 
 
-execute 'syn region mkdSubscriptContent start="{sub}`\zs" end="\ze`" contains=@Spell' . s:conceal
-execute 'syn region mkdSuperscriptContent start="{sup}`\zs" end="\ze`" contains=@Spell' . s:conceal
-syn match mkdSubscriptDelimiter "{sub}`\|`" contained
-syn match mkdSuperscriptDelimiter "{sup}`\|`" contained
-syn region mkdSubscript start="{sub}`" end="`" contains=mkdSubscriptContent,mkdSubscriptDelimiter
-syn region mkdSuperscript start="{sup}`" end="`" contains=mkdSuperscriptContent,mkdSuperscriptDelimiter
+execute 'syn region mkdSubscript start="{sub}`" end="`" contains=mkdSubscriptContent,mkdSubscriptDelimiter' . s:conceal
+execute 'syn region mkdSuperscript start="{sup}`" end="`" contains=mkdSuperscriptContent,mkdSuperscriptDelimiter' . s:conceal
+syn match mkdSubscriptContent "{sub}`\@<=.\{-}`\@=" contained
+syn match mkdSuperscriptContent "{sup}`\@<=.\{-}`\@=" contained
+syn match mkdSubscriptDelimiter "{sub}`\|`" contained conceal
+syn match mkdSuperscriptDelimiter "{sup}`\|`" contained conceal
 
 
 " [link](URL) | [link][id] | [link][] | ![image](URL)
@@ -180,7 +180,7 @@ endif
 
 syn match mkdCustomLabel /^\s*(\([[:alnum:][:punct:]_-]*\))=\s*$/
 
-syn cluster mkdNonListItem contains=@htmlTop,mkdSubscriptContent,mkdSuperscriptDelimiter,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
+syn cluster mkdNonListItem contains=@htmlTop,mkdSubscriptContent,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
 
 
 

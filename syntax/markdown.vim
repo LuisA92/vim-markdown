@@ -64,19 +64,6 @@ execute 'syn region htmlBold matchgroup=mkdBold start="\%(^\|\s\)\zs__\ze\S" end
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs\*\*\*\ze\S" end="\S\zs\*\*\*" keepend contains=@Spell' . s:oneline . s:concealends
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend contains=@Spell' . s:oneline . s:concealends
 
-
-execute 'syn region mkdSubscript start="{sub}`" end="`" contains=mkdSubscriptDelimiter,mkdSubscriptContent' . s:conceal
-execute 'syn region mkdSuperscript start="{sup}`" end="`" contains=mkdSuperscriptDelimiter,mkdSuperscriptContent' . s:conceal
-syn match mkdSubscriptDelimiter "{sub}`" contained conceal
-syn match mkdSuperscriptDelimiter "{sup}`" contained conceal
-syn match mkdSubscriptContent "`" contained conceal
-syn match mkdSuperscriptContent "`" contained conceal
-syn region mkdSubscriptContent matchgroup=mkdSubscriptContent start="[^`]" end="[^`]" contained
-syn region mkdSuperscriptContent matchgroup=mkdSuperscriptContent start="[^`]" end="[^`]" contained
-
-
-
-
 " [link](URL) | [link][id] | [link][] | ![image](URL)
 syn region mkdFootnotes matchgroup=mkdDelimiter start="\[^"    end="\]"
 execute 'syn region mkdID matchgroup=mkdDelimiter    start="\["    end="\]" contained oneline' . s:conceal
@@ -184,7 +171,7 @@ endif
 
 syn match mkdCustomLabel /^\s*(\([[:alnum:][:punct:]_-]*\))=\s*$/
 
-syn cluster mkdNonListItem contains=@htmlTop,mkdSubscriptContent,mkdCustomLabel,mkdSubscript,mkdSuperscript,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
+syn cluster mkdNonListItem contains=@htmlTop,mkdCustomLabel,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
 
 
 
@@ -211,11 +198,6 @@ HtmlHiLink mkdLinkTitle        htmlString
 HtmlHiLink mkdDelimiter        Delimiter
 HtmlHiLink mystDirective       Comment
 HtmlHiLink mkdCustomLabel      String
-
-HtmlHiLink mkdSubscriptContent Subscript
-HtmlHiLink mkdSuperscriptContent Superscript
-HtmlHiLink mkdSubscriptDelimiter Conceal
-HtmlHiLink mkdSuperscriptDelimiter Conceal
 
 
 

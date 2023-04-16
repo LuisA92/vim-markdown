@@ -65,8 +65,8 @@ execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs
 execute 'syn region htmlBoldItalic matchgroup=mkdBoldItalic start="\%(^\|\s\)\zs___\ze\S" end="\S\zs___" keepend contains=@Spell' . s:oneline . s:concealends
 
 
-execute 'syn region mkdSubscript start="{sub}`" end="`" contains=mkdSubscriptContent,mkdSubscriptDelimiter' . s:conceal
-execute 'syn region mkdSuperscript start="{sup}`" end="`" contains=mkdSuperscriptContent,mkdSuperscriptDelimiter' . s:conceal
+execute 'syn region mkdSubscript start="{sub}`" end="`" contains=mkdSubscriptDelimiter' . s:conceal
+execute 'syn region mkdSuperscript start="{sup}`" end="`" contains=mkdSuperscriptDelimiter' . s:conceal
 syn match mkdSubscriptContent "{sub}`\@<=.\{-}`\@=" contained
 syn match mkdSuperscriptContent "{sup}`\@<=.\{-}`\@=" contained
 syn match mkdSubscriptDelimiter "{sub}`\|`" contained conceal

@@ -166,6 +166,10 @@ endif
 
 syn cluster mkdNonListItem contains=@htmlTop,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath,mkdStrike
 
+
+syn match mkdCustomLabel /^\(\s*\)\([[:alnum:][:punct:]_-]*\)=\s*$/
+
+
 "highlighting for Markdown groups
 HtmlHiLink mkdString           String
 HtmlHiLink mkdCode             String
@@ -188,15 +192,9 @@ HtmlHiLink mkdLinkDefTarget    mkdURL
 HtmlHiLink mkdLinkTitle        htmlString
 HtmlHiLink mkdDelimiter        Delimiter
 HtmlHiLink mystDirective       Comment
+HtmlHiLink mkdCustomLabel      Comment
 
 
-
-" Define the pattern to match (my label)=
-syn match myLabel /\v\([[:alnum:] _-]+\)=/
-
-" Define the highlighting style for the matched pattern
-hi def link myLabelItalicize Comment
-hi myLabelItalicize gui=italic
 
 
 
